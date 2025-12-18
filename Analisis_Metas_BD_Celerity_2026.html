@@ -775,12 +775,17 @@
         </div>
 
         <!-- Navigation Tabs -->
-        <div class="nav-tabs no-print">
-            <button class="nav-tab active" onclick="showTab('dashboard')">Dashboard</button>
-            <button class="nav-tab" onclick="showTab('pipeline')">Pipeline CRM</button>
-            <button class="nav-tab" onclick="showTab('registro')">Nuevo Registro</button>
-            <button class="nav-tab" onclick="showTab('audit')">Audit Trail</button>
-            <button class="nav-tab" onclick="showTab('metas')">Metas 2026</button>
+        <div class="nav-tabs no-print" style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; gap: 4px;">
+                <button class="nav-tab active" onclick="showTab('dashboard')">Dashboard</button>
+                <button class="nav-tab" onclick="showTab('pipeline')">Pipeline CRM</button>
+                <button class="nav-tab" onclick="showTab('registro')">Nuevo Registro</button>
+                <button class="nav-tab" onclick="showTab('audit')">Audit Trail</button>
+                <button class="nav-tab" onclick="showTab('metas')">Metas 2026</button>
+            </div>
+            <button onclick="loadDataFromSheets()" style="background: #10b981; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: 500; display: flex; align-items: center; gap: 6px;" title="Sincronizar con Google Sheets">
+                ↻ Sincronizar
+            </button>
         </div>
 
         <!-- TAB: Dashboard -->
@@ -1593,11 +1598,171 @@
     </div>
 
     <script>
+        // ========== GOOGLE SHEETS API ==========
+        const API_URL = 'https://script.google.com/macros/s/AKfycby-uddKhEFhCXcUmfYtVGKvQOc_yryq26doiniNhxiISUXdctGbMbjuD7r6R7S1QQcQ5w/exec';
+
         // ========== DATA STORAGE ==========
-        let opportunities = JSON.parse(localStorage.getItem('celerity_opportunities') || '[]');
-        let auditLog = JSON.parse(localStorage.getItem('celerity_audit') || '[]');
+        let opportunities = [];
+        let auditLog = [];
         let selectedUser = 'Mary Talledo';
         let selectedStage = 'Pre-feasibility';
+        let isLoading = false;
+
+        // ========== API FUNCTIONS ==========
+        async function loadDataFromSheets() {
+            try {
+                showLoading(true);
+
+                // Cargar Pipeline
+                const pipelineResponse = await fetch(`${API_URL}?action=read`);
+                const pipelineData = await pipelineResponse.json();
+
+                if (pipelineData.success && pipelineData.data) {
+                    opportunities = pipelineData.data.map(row => ({
+                        id: row['ID'] || row['id'],
+                        date: row['Fecha'] || row['fecha'] || '',
+                        sponsor: row['Sponsor'] || row['sponsor'] || '',
+                        study: row['Estudio'] || row['estudio'] || '',
+                        sites: row['Site'] || row['site'] || '',
+                        stage: row['Etapa'] || row['etapa'] || 'Pre-feasibility',
+                        value: parseFloat(row['Valor'] || row['valor'] || 0),
+                        probability: parseInt(row['Probabilidad'] || row['probabilidad'] || 50),
+                        contact: row['Contacto'] || row['contacto'] || '',
+                        notes: row['Notas'] || row['notas'] || '',
+                        manager: row['BD_Manager'] || row['bd_manager'] || 'Mary Talledo'
+                    }));
+                }
+
+                // Cargar Audit
+                const auditResponse = await fetch(`${API_URL}?action=audit`);
+                const auditData = await auditResponse.json();
+
+                if (auditData.success && auditData.data) {
+                    auditLog = auditData.data.map(row => ({
+                        id: row['Timestamp'] || Date.now(),
+                        type: (row['Accion'] || 'update').toLowerCase(),
+                        title: row['Detalles'] || '',
+                        user: row['Usuario'] || 'Sistema',
+                        details: { registroId: row['Registro_ID'] },
+                        timestamp: row['Timestamp'] || new Date().toISOString()
+                    }));
+                }
+
+                showLoading(false);
+                updateDashboard();
+                renderPipelineTable();
+                renderAuditTrail();
+
+            } catch (error) {
+                console.error('Error cargando datos:', error);
+                showLoading(false);
+                showNotification('Error al cargar datos de Google Sheets', 'error');
+            }
+        }
+
+        async function createRecordInSheets(data) {
+            try {
+                const params = new URLSearchParams({
+                    action: 'create',
+                    bd_manager: data.manager,
+                    sponsor: data.sponsor,
+                    estudio: data.study,
+                    site: data.sites,
+                    etapa: data.stage,
+                    valor: data.value,
+                    probabilidad: data.probability || 50,
+                    contacto: data.contact || '',
+                    notas: data.notes || ''
+                });
+
+                const response = await fetch(`${API_URL}?${params.toString()}`);
+                const result = await response.json();
+                return result;
+            } catch (error) {
+                console.error('Error creando registro:', error);
+                throw error;
+            }
+        }
+
+        async function updateRecordInSheets(data) {
+            try {
+                const params = new URLSearchParams({
+                    action: 'update',
+                    id: data.id,
+                    bd_manager: data.manager,
+                    sponsor: data.sponsor,
+                    estudio: data.study,
+                    site: data.sites,
+                    etapa: data.stage,
+                    valor: data.value,
+                    probabilidad: data.probability || 50,
+                    contacto: data.contact || '',
+                    notas: data.notes || ''
+                });
+
+                const response = await fetch(`${API_URL}?${params.toString()}`);
+                const result = await response.json();
+                return result;
+            } catch (error) {
+                console.error('Error actualizando registro:', error);
+                throw error;
+            }
+        }
+
+        async function deleteRecordFromSheets(id) {
+            try {
+                const params = new URLSearchParams({
+                    action: 'delete',
+                    id: id
+                });
+
+                const response = await fetch(`${API_URL}?${params.toString()}`);
+                const result = await response.json();
+                return result;
+            } catch (error) {
+                console.error('Error eliminando registro:', error);
+                throw error;
+            }
+        }
+
+        function showLoading(show) {
+            isLoading = show;
+            const existingOverlay = document.getElementById('loading-overlay');
+
+            if (show) {
+                if (!existingOverlay) {
+                    const overlay = document.createElement('div');
+                    overlay.id = 'loading-overlay';
+                    overlay.innerHTML = `
+                        <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(255,255,255,0.8); display: flex; align-items: center; justify-content: center; z-index: 9999;">
+                            <div style="text-align: center;">
+                                <div style="width: 50px; height: 50px; border: 4px solid #e5e7eb; border-top-color: #3b82f6; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+                                <p style="margin-top: 16px; color: #374151; font-weight: 500;">Cargando datos...</p>
+                            </div>
+                        </div>
+                        <style>@keyframes spin { to { transform: rotate(360deg); } }</style>
+                    `;
+                    document.body.appendChild(overlay);
+                }
+            } else {
+                if (existingOverlay) {
+                    existingOverlay.remove();
+                }
+            }
+        }
+
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed; top: 20px; right: 20px; padding: 16px 24px; border-radius: 8px;
+                color: white; font-weight: 500; z-index: 10000; animation: slideIn 0.3s ease;
+                background: ${type === 'error' ? '#ef4444' : '#10b981'};
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            setTimeout(() => notification.remove(), 3000);
+        }
 
         // ========== INITIALIZATION ==========
         document.addEventListener('DOMContentLoaded', function() {
@@ -1612,10 +1777,8 @@
             const week = getWeekNumber(currentDate);
             weekInput.value = `${year}-W${week.toString().padStart(2, '0')}`;
 
-            // Initialize displays
-            updateDashboard();
-            renderPipelineTable();
-            renderAuditTrail();
+            // Cargar datos desde Google Sheets
+            loadDataFromSheets();
         });
 
         function getWeekNumber(date) {
@@ -1657,11 +1820,12 @@
         }
 
         // ========== OPPORTUNITY CRUD ==========
-        function saveOpportunity(e) {
+        async function saveOpportunity(e) {
             e.preventDefault();
 
+            if (isLoading) return;
+
             const opportunity = {
-                id: Date.now(),
                 date: document.getElementById('reg-date').value,
                 week: document.getElementById('reg-week').value,
                 sponsor: document.getElementById('reg-sponsor').value,
@@ -1677,27 +1841,29 @@
                 contact: document.getElementById('reg-contact').value,
                 notes: document.getElementById('reg-notes').value,
                 stage: selectedStage,
-                manager: selectedUser,
-                createdAt: new Date().toISOString(),
-                updatedAt: new Date().toISOString()
+                manager: selectedUser
             };
 
-            opportunities.push(opportunity);
-            saveData();
+            try {
+                showLoading(true);
+                const result = await createRecordInSheets(opportunity);
 
-            addAuditEntry('create', `Nueva oportunidad: ${opportunity.study}`, selectedUser, {
-                sponsor: opportunity.sponsor,
-                value: opportunity.value,
-                stage: opportunity.stage
-            });
-
-            clearForm();
-            updateDashboard();
-            renderPipelineTable();
-            alert('Registro guardado exitosamente!');
-            showTab('pipeline');
-            document.querySelector('.nav-tab:nth-child(2)').classList.add('active');
-            document.querySelector('.nav-tab:nth-child(1)').classList.remove('active');
+                if (result.success) {
+                    showNotification('Registro guardado exitosamente!');
+                    clearForm();
+                    await loadDataFromSheets();
+                    showTab('pipeline');
+                    document.querySelector('.nav-tab:nth-child(2)').classList.add('active');
+                    document.querySelector('.nav-tab:nth-child(1)').classList.remove('active');
+                } else {
+                    showNotification('Error al guardar: ' + (result.message || 'Error desconocido'), 'error');
+                }
+            } catch (error) {
+                showNotification('Error de conexion con Google Sheets', 'error');
+                console.error(error);
+            } finally {
+                showLoading(false);
+            }
         }
 
         function editOpportunity(id) {
@@ -1717,65 +1883,72 @@
             document.getElementById('edit-modal').classList.add('active');
         }
 
-        function updateOpportunity(e) {
+        async function updateOpportunity(e) {
             e.preventDefault();
 
-            const id = parseInt(document.getElementById('edit-id').value);
-            const oppIndex = opportunities.findIndex(o => o.id === id);
-            if (oppIndex === -1) return;
+            if (isLoading) return;
 
-            const oldOpp = {...opportunities[oppIndex]};
-            const newStage = document.getElementById('edit-stage').value;
-            const newValue = parseFloat(document.getElementById('edit-value').value);
+            const id = document.getElementById('edit-id').value;
+            const opp = opportunities.find(o => o.id === id || o.id == id);
+            if (!opp) {
+                showNotification('Registro no encontrado', 'error');
+                return;
+            }
 
-            opportunities[oppIndex] = {
-                ...opportunities[oppIndex],
+            const updatedData = {
+                id: id,
                 date: document.getElementById('edit-date').value,
                 sponsor: document.getElementById('edit-sponsor').value,
                 study: document.getElementById('edit-study').value,
                 sites: document.getElementById('edit-sites').value,
-                stage: newStage,
-                value: newValue,
+                stage: document.getElementById('edit-stage').value,
+                value: parseFloat(document.getElementById('edit-value').value),
                 manager: document.getElementById('edit-manager').value,
                 notes: document.getElementById('edit-notes').value,
-                updatedAt: new Date().toISOString()
+                probability: opp.probability || 50,
+                contact: opp.contact || ''
             };
 
-            saveData();
+            try {
+                showLoading(true);
+                const result = await updateRecordInSheets(updatedData);
 
-            // Audit changes
-            let changes = [];
-            if (oldOpp.stage !== newStage) changes.push(`Etapa: ${oldOpp.stage} → ${newStage}`);
-            if (oldOpp.value !== newValue) changes.push(`Valor: ${formatCurrency(oldOpp.value)} → ${formatCurrency(newValue)}`);
-            if (oldOpp.manager !== document.getElementById('edit-manager').value) changes.push(`Manager cambiado`);
-
-            if (changes.length > 0) {
-                addAuditEntry('update', `Actualizado: ${opportunities[oppIndex].study}`, opportunities[oppIndex].manager, {
-                    changes: changes.join(', ')
-                });
+                if (result.success) {
+                    showNotification('Registro actualizado exitosamente!');
+                    closeEditModal();
+                    await loadDataFromSheets();
+                } else {
+                    showNotification('Error al actualizar: ' + (result.message || 'Error desconocido'), 'error');
+                }
+            } catch (error) {
+                showNotification('Error de conexion con Google Sheets', 'error');
+                console.error(error);
+            } finally {
+                showLoading(false);
             }
-
-            closeEditModal();
-            updateDashboard();
-            renderPipelineTable();
-            renderAuditTrail();
         }
 
-        function deleteOpportunity(id) {
+        async function deleteOpportunity(id) {
             if (!confirm('¿Estas seguro de eliminar este registro?')) return;
 
-            const opp = opportunities.find(o => o.id === id);
-            opportunities = opportunities.filter(o => o.id !== id);
-            saveData();
+            if (isLoading) return;
 
-            addAuditEntry('delete', `Eliminado: ${opp.study}`, opp.manager, {
-                sponsor: opp.sponsor,
-                value: opp.value
-            });
+            try {
+                showLoading(true);
+                const result = await deleteRecordFromSheets(id);
 
-            updateDashboard();
-            renderPipelineTable();
-            renderAuditTrail();
+                if (result.success) {
+                    showNotification('Registro eliminado exitosamente!');
+                    await loadDataFromSheets();
+                } else {
+                    showNotification('Error al eliminar: ' + (result.message || 'Error desconocido'), 'error');
+                }
+            } catch (error) {
+                showNotification('Error de conexion con Google Sheets', 'error');
+                console.error(error);
+            } finally {
+                showLoading(false);
+            }
         }
 
         function clearForm() {
@@ -1785,27 +1958,8 @@
             document.getElementById('reg-probability').value = '50';
         }
 
-        // ========== DATA PERSISTENCE ==========
-        function saveData() {
-            localStorage.setItem('celerity_opportunities', JSON.stringify(opportunities));
-            localStorage.setItem('celerity_audit', JSON.stringify(auditLog));
-        }
-
         // ========== AUDIT TRAIL ==========
-        function addAuditEntry(type, title, user, details) {
-            const entry = {
-                id: Date.now(),
-                type: type,
-                title: title,
-                user: user,
-                details: details,
-                timestamp: new Date().toISOString()
-            };
-            auditLog.unshift(entry);
-            if (auditLog.length > 500) auditLog = auditLog.slice(0, 500);
-            saveData();
-            renderAuditTrail();
-        }
+        // Nota: El audit se registra automaticamente en Google Sheets desde el servidor
 
         function renderAuditTrail() {
             const container = document.getElementById('audit-trail');
@@ -1815,30 +1969,45 @@
             }
 
             const iconMap = {
+                crear: { class: 'create', icon: '+' },
                 create: { class: 'create', icon: '+' },
+                actualizar: { class: 'update', icon: '✎' },
                 update: { class: 'update', icon: '✎' },
+                eliminar: { class: 'delete', icon: '×' },
                 delete: { class: 'delete', icon: '×' },
                 stage: { class: 'stage', icon: '→' }
             };
 
             container.innerHTML = auditLog.map(entry => {
-                const icon = iconMap[entry.type] || iconMap.update;
-                const date = new Date(entry.timestamp);
-                const formattedDate = date.toLocaleDateString('es-ES', { day: '2-digit', month: 'short', year: 'numeric' });
-                const formattedTime = date.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+                const type = (entry.type || 'update').toLowerCase();
+                const icon = iconMap[type] || iconMap.update;
+
+                let formattedDate = '';
+                let formattedTime = '';
+
+                try {
+                    const date = new Date(entry.timestamp);
+                    if (!isNaN(date.getTime())) {
+                        formattedDate = date.toLocaleDateString('es-ES', { day: '2-digit', month: 'short', year: 'numeric' });
+                        formattedTime = date.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+                    }
+                } catch (e) {
+                    formattedDate = entry.timestamp || '';
+                }
 
                 let detailsStr = '';
                 if (entry.details) {
                     if (entry.details.changes) detailsStr = entry.details.changes;
                     else if (entry.details.value) detailsStr = `Valor: ${formatCurrency(entry.details.value)}`;
+                    else if (entry.details.registroId) detailsStr = `ID: ${entry.details.registroId}`;
                 }
 
                 return `
                     <div class="audit-item">
                         <div class="audit-icon ${icon.class}">${icon.icon}</div>
                         <div class="audit-content">
-                            <div class="audit-title">${entry.title}</div>
-                            <div class="audit-details">Por: ${entry.user}${detailsStr ? ' | ' + detailsStr : ''}</div>
+                            <div class="audit-title">${entry.title || 'Accion registrada'}</div>
+                            <div class="audit-details">Por: ${entry.user || 'Sistema'}${detailsStr ? ' | ' + detailsStr : ''}</div>
                         </div>
                         <div class="audit-time">${formattedDate}<br>${formattedTime}</div>
                     </div>
