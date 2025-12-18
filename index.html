@@ -1,0 +1,2258 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celerity - CRM Business Development 2026 | Site Networks Clinical Research</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        :root {
+            --celerity-coral: #E8756C;
+            --celerity-coral-light: #F4A59E;
+            --celerity-teal: #2D9596;
+            --celerity-teal-light: #5BC0BE;
+            --celerity-navy: #1B4965;
+            --celerity-navy-dark: #0D2438;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --danger: #EF4444;
+            --white: #FFFFFF;
+            --gray-50: #F9FAFB;
+            --gray-100: #F3F4F6;
+            --gray-200: #E5E7EB;
+            --gray-300: #D1D5DB;
+            --gray-500: #6B7280;
+            --gray-600: #4B5563;
+            --gray-700: #374151;
+            --gray-800: #1F2937;
+            --gray-900: #111827;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--gray-50);
+            color: var(--gray-800);
+            line-height: 1.6;
+            padding: 20px 40px;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        /* Header con Logo */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 32px;
+            padding: 24px 40px;
+            background: linear-gradient(135deg, var(--celerity-navy), var(--celerity-navy-dark));
+            border-radius: 20px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(45,149,150,0.3) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            z-index: 1;
+        }
+
+        .logo-container {
+            background: white;
+            padding: 12px 20px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-text {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--celerity-navy);
+            letter-spacing: -1px;
+        }
+
+        .logo-text span {
+            color: var(--celerity-coral);
+        }
+
+        .header-info h1 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .header-info p {
+            font-size: 13px;
+            opacity: 0.8;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+            z-index: 1;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: var(--celerity-coral);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #d66459;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.15);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.25);
+        }
+
+        /* Tabs de navegacion */
+        .nav-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+            background: white;
+            padding: 8px;
+            border-radius: 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        .nav-tab {
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            color: var(--gray-600);
+            transition: all 0.2s;
+        }
+
+        .nav-tab:hover {
+            background: var(--gray-100);
+        }
+
+        .nav-tab.active {
+            background: var(--celerity-navy);
+            color: white;
+        }
+
+        /* Secciones */
+        .section {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--gray-100);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--celerity-navy);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title .icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--celerity-teal), var(--celerity-teal-light));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        /* User selector */
+        .user-selector {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .user-btn {
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            border: 2px solid var(--gray-200);
+            background: white;
+            color: var(--gray-700);
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-btn:hover {
+            border-color: var(--celerity-teal);
+        }
+
+        .user-btn.active {
+            border-color: var(--celerity-teal);
+            background: linear-gradient(135deg, var(--celerity-teal), var(--celerity-teal-light));
+            color: white;
+        }
+
+        .user-btn.mary.active {
+            background: linear-gradient(135deg, var(--celerity-coral), var(--celerity-coral-light));
+            border-color: var(--celerity-coral);
+        }
+
+        .user-btn.moises.active {
+            background: linear-gradient(135deg, var(--celerity-navy), var(--celerity-navy-dark));
+            border-color: var(--celerity-navy);
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 12px;
+            background: var(--gray-200);
+            color: var(--gray-700);
+        }
+
+        .user-btn.active .user-avatar {
+            background: rgba(255,255,255,0.3);
+            color: white;
+        }
+
+        /* Formulario de registro */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-group.full-width {
+            grid-column: span 4;
+        }
+
+        .form-group.half-width {
+            grid-column: span 2;
+        }
+
+        .form-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--gray-600);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-input, .form-select, .form-textarea {
+            padding: 10px 14px;
+            border: 1px solid var(--gray-200);
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--celerity-teal);
+            box-shadow: 0 0 0 3px rgba(45,149,150,0.1);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        /* Pipeline stages */
+        .pipeline-stages {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 20px;
+        }
+
+        .pipeline-stage {
+            flex: 1;
+            padding: 12px 8px;
+            text-align: center;
+            font-size: 11px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: var(--gray-100);
+            color: var(--gray-600);
+            border: 2px solid transparent;
+        }
+
+        .pipeline-stage:hover {
+            background: var(--gray-200);
+        }
+
+        .pipeline-stage.active {
+            background: var(--celerity-teal);
+            color: white;
+        }
+
+        .pipeline-stage.prefeasibility.active { background: #6366F1; }
+        .pipeline-stage.feasibility.active { background: #8B5CF6; }
+        .pipeline-stage.qualification.active { background: #F59E0B; }
+        .pipeline-stage.awarded.active { background: #10B981; }
+        .pipeline-stage.contracted.active { background: var(--celerity-coral); }
+
+        /* Tabla CRM */
+        .crm-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        .crm-table th {
+            background: var(--gray-50);
+            padding: 12px 10px;
+            text-align: left;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--gray-600);
+            border-bottom: 2px solid var(--gray-200);
+        }
+
+        .crm-table td {
+            padding: 12px 10px;
+            border-bottom: 1px solid var(--gray-100);
+            vertical-align: middle;
+        }
+
+        .crm-table tr:hover td {
+            background: var(--gray-50);
+        }
+
+        .stage-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .stage-badge.prefeasibility { background: #EEF2FF; color: #4338CA; }
+        .stage-badge.feasibility { background: #F3E8FF; color: #7C3AED; }
+        .stage-badge.qualification { background: #FEF3C7; color: #D97706; }
+        .stage-badge.awarded { background: #D1FAE5; color: #059669; }
+        .stage-badge.contracted { background: #FEE2E2; color: #DC2626; }
+
+        .amount {
+            font-weight: 700;
+            color: var(--celerity-navy);
+        }
+
+        /* Audit Trail */
+        .audit-trail {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .audit-item {
+            display: flex;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        .audit-item:last-child {
+            border-bottom: none;
+        }
+
+        .audit-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .audit-icon.create { background: #D1FAE5; color: #059669; }
+        .audit-icon.update { background: #DBEAFE; color: #2563EB; }
+        .audit-icon.delete { background: #FEE2E2; color: #DC2626; }
+        .audit-icon.stage { background: #FEF3C7; color: #D97706; }
+
+        .audit-content {
+            flex: 1;
+        }
+
+        .audit-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--gray-800);
+            margin-bottom: 2px;
+        }
+
+        .audit-details {
+            font-size: 12px;
+            color: var(--gray-500);
+        }
+
+        .audit-time {
+            font-size: 11px;
+            color: var(--gray-400);
+            text-align: right;
+            white-space: nowrap;
+        }
+
+        /* KPI Cards */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .kpi-card {
+            background: linear-gradient(135deg, var(--gray-50), white);
+            border-radius: 12px;
+            padding: 16px;
+            border: 1px solid var(--gray-200);
+        }
+
+        .kpi-card.highlight {
+            background: linear-gradient(135deg, var(--celerity-teal), var(--celerity-teal-light));
+            color: white;
+            border: none;
+        }
+
+        .kpi-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            opacity: 0.8;
+            margin-bottom: 6px;
+        }
+
+        .kpi-value {
+            font-size: 24px;
+            font-weight: 800;
+        }
+
+        .kpi-card:not(.highlight) .kpi-value {
+            color: var(--celerity-navy);
+        }
+
+        .kpi-change {
+            font-size: 11px;
+            margin-top: 4px;
+        }
+
+        .kpi-change.positive { color: var(--success); }
+        .kpi-change.negative { color: var(--danger); }
+
+        /* Asegurar contraste en tarjeta highlight */
+        .kpi-card.highlight .kpi-change {
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: 600;
+        }
+
+        /* Reportes */
+        .report-filters {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .filter-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--gray-600);
+        }
+
+        /* Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: white;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 28px;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .modal-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--celerity-navy);
+        }
+
+        .modal-close {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            border: none;
+            background: var(--gray-100);
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Tabs content */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Progress bar */
+        .progress-bar {
+            height: 8px;
+            background: var(--gray-200);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--celerity-teal), var(--celerity-teal-light));
+            border-radius: 4px;
+            transition: width 0.3s;
+        }
+
+        /* Grid layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        /* Charts placeholder */
+        .chart-container {
+            height: 250px;
+            background: var(--gray-50);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray-500);
+            font-size: 14px;
+        }
+
+        /* Actions */
+        .action-btn {
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+
+        .action-btn.edit {
+            background: #DBEAFE;
+            color: #2563EB;
+        }
+
+        .action-btn.delete {
+            background: #FEE2E2;
+            color: #DC2626;
+        }
+
+        /* Person cards - Simplified */
+        .person-summary {
+            display: flex;
+            gap: 16px;
+            padding: 16px;
+            background: var(--gray-50);
+            border-radius: 12px;
+            align-items: center;
+        }
+
+        .person-summary .avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 16px;
+            color: white;
+        }
+
+        .person-summary.mary .avatar { background: linear-gradient(135deg, var(--celerity-coral), var(--celerity-coral-light)); }
+        .person-summary.javier .avatar { background: linear-gradient(135deg, var(--celerity-teal), var(--celerity-teal-light)); }
+        .person-summary.moises .avatar { background: linear-gradient(135deg, var(--celerity-navy), #2E6B8A); }
+
+        .person-summary .info {
+            flex: 1;
+        }
+
+        .person-summary .name {
+            font-weight: 700;
+            color: var(--gray-900);
+        }
+
+        .person-summary .region {
+            font-size: 12px;
+            color: var(--gray-500);
+        }
+
+        .person-summary .stats {
+            display: flex;
+            gap: 24px;
+        }
+
+        .person-summary .stat {
+            text-align: center;
+        }
+
+        .person-summary .stat-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--celerity-navy);
+        }
+
+        .person-summary .stat-label {
+            font-size: 10px;
+            color: var(--gray-500);
+            text-transform: uppercase;
+        }
+
+        /* Print styles */
+        @media print {
+            body { padding: 0; }
+            .no-print { display: none !important; }
+            .section { break-inside: avoid; }
+        }
+
+        @media (max-width: 1200px) {
+            .kpi-grid { grid-template-columns: repeat(3, 1fr); }
+            .form-grid { grid-template-columns: repeat(2, 1fr); }
+            .grid-3 { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+            .form-grid { grid-template-columns: 1fr; }
+            .grid-2, .grid-3 { grid-template-columns: 1fr; }
+            .header { flex-direction: column; gap: 16px; text-align: center; }
+            .header-actions { justify-content: center; }
+            .user-selector { flex-wrap: wrap; justify-content: center; }
+            .pipeline-stages { flex-wrap: wrap; }
+            body { padding: 12px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header con Logo -->
+        <div class="header">
+            <div class="header-left">
+                <div class="logo-container">
+                    <img src="Logo%20Celerity_solo%20logo.png" alt="Celerity" style="height: 50px; width: auto;">
+                </div>
+                <div class="header-info">
+                    <h1>CRM Business Development 2026</h1>
+                    <p>Site Networks Clinical Research - Pipeline & Performance Tracker</p>
+                </div>
+            </div>
+            <div class="header-actions no-print">
+                <button class="btn btn-secondary" onclick="openReportModal()">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                    Reportes
+                </button>
+                <button class="btn btn-primary" onclick="exportToPDF()">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                    Exportar PDF
+                </button>
+            </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="nav-tabs no-print" style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; gap: 4px;">
+                <button class="nav-tab active" onclick="showTab('dashboard')">Dashboard</button>
+                <button class="nav-tab" onclick="showTab('pipeline')">Pipeline CRM</button>
+                <button class="nav-tab" onclick="showTab('registro')">Nuevo Registro</button>
+                <button class="nav-tab" onclick="showTab('audit')">Audit Trail</button>
+                <button class="nav-tab" onclick="showTab('metas')">Metas 2026</button>
+            </div>
+            <button onclick="loadDataFromSheets()" style="background: #10b981; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: 500; display: flex; align-items: center; gap: 6px;" title="Sincronizar con Google Sheets">
+                ↻ Sincronizar
+            </button>
+        </div>
+
+        <!-- TAB: Dashboard -->
+        <div id="dashboard" class="tab-content active">
+            <!-- KPIs Resumidos -->
+            <div class="kpi-grid">
+                <div class="kpi-card highlight">
+                    <div class="kpi-label">Revenue YTD</div>
+                    <div class="kpi-value" id="kpi-revenue">$0</div>
+                    <div class="kpi-change positive">Meta: $15.000.000</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Sites Activados</div>
+                    <div class="kpi-value" id="kpi-estudios">0</div>
+                    <div class="kpi-change">Meta: 6 sites</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Pipeline Activo</div>
+                    <div class="kpi-value" id="kpi-pipeline">$0</div>
+                    <div class="kpi-change">Meta: $45.000.000</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Win Rate (Valor)</div>
+                    <div class="kpi-value" id="kpi-winrate">0%</div>
+                    <div class="kpi-change">Meta: 22%</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Leads Activos</div>
+                    <div class="kpi-value" id="kpi-leads">0</div>
+                    <div class="kpi-change">Meta: 27/año</div>
+                </div>
+            </div>
+
+            <!-- Resumen por persona -->
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <span class="icon">
+                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                        </span>
+                        Performance por BD Manager
+                    </h2>
+                </div>
+                <div class="grid-3">
+                    <div class="person-summary mary">
+                        <div class="avatar">MT</div>
+                        <div class="info">
+                            <div class="name">Mary Talledo</div>
+                            <div class="region">LATAM</div>
+                        </div>
+                        <div class="stats">
+                            <div class="stat">
+                                <div class="stat-value" id="mary-revenue">$0</div>
+                                <div class="stat-label">Revenue</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value" id="mary-studies">0</div>
+                                <div class="stat-label">Estudios</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="person-summary javier">
+                        <div class="avatar">JH</div>
+                        <div class="info">
+                            <div class="name">Javier Handal</div>
+                            <div class="region">USA / Canada</div>
+                        </div>
+                        <div class="stats">
+                            <div class="stat">
+                                <div class="stat-value" id="javier-revenue">$0</div>
+                                <div class="stat-label">Revenue</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value" id="javier-studies">0</div>
+                                <div class="stat-label">Estudios</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="person-summary moises">
+                        <div class="avatar">MC</div>
+                        <div class="info">
+                            <div class="name">Moises Cure</div>
+                            <div class="region">Europa / Asia</div>
+                        </div>
+                        <div class="stats">
+                            <div class="stat">
+                                <div class="stat-value" id="moises-revenue">$0</div>
+                                <div class="stat-label">Revenue</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value" id="moises-studies">0</div>
+                                <div class="stat-label">Estudios</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pipeline por etapa -->
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <span class="icon">
+                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+                        </span>
+                        Pipeline por Etapa
+                    </h2>
+                </div>
+                <div class="kpi-grid" style="grid-template-columns: repeat(5, 1fr);">
+                    <div class="kpi-card" style="border-left: 4px solid #6366F1;">
+                        <div class="kpi-label">Pre-feasibility</div>
+                        <div class="kpi-value" id="stage-prefeasibility">0</div>
+                        <div class="kpi-change" id="stage-prefeasibility-value">$0</div>
+                    </div>
+                    <div class="kpi-card" style="border-left: 4px solid #8B5CF6;">
+                        <div class="kpi-label">Feasibility</div>
+                        <div class="kpi-value" id="stage-feasibility">0</div>
+                        <div class="kpi-change" id="stage-feasibility-value">$0</div>
+                    </div>
+                    <div class="kpi-card" style="border-left: 4px solid #F59E0B;">
+                        <div class="kpi-label">Visita Calificacion</div>
+                        <div class="kpi-value" id="stage-qualification">0</div>
+                        <div class="kpi-change" id="stage-qualification-value">$0</div>
+                    </div>
+                    <div class="kpi-card" style="border-left: 4px solid #10B981;">
+                        <div class="kpi-label">Adjudicado</div>
+                        <div class="kpi-value" id="stage-awarded">0</div>
+                        <div class="kpi-change" id="stage-awarded-value">$0</div>
+                    </div>
+                    <div class="kpi-card" style="border-left: 4px solid var(--celerity-coral);">
+                        <div class="kpi-label">Contrato Firmado</div>
+                        <div class="kpi-value" id="stage-contracted">0</div>
+                        <div class="kpi-change" id="stage-contracted-value">$0</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB: Pipeline CRM -->
+        <div id="pipeline" class="tab-content">
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <span class="icon">
+                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+                        </span>
+                        Pipeline de Oportunidades
+                    </h2>
+                    <button class="btn btn-primary no-print" onclick="showTab('registro')">+ Nuevo Registro</button>
+                </div>
+
+                <!-- Filtros -->
+                <div class="report-filters no-print">
+                    <div class="filter-group">
+                        <span class="filter-label">BD Manager:</span>
+                        <select class="form-select" id="filter-manager" onchange="filterPipeline()">
+                            <option value="all">Todos</option>
+                            <option value="Mary Talledo">Mary Talledo</option>
+                            <option value="Javier Handal">Javier Handal</option>
+                            <option value="Moises Cure">Moises Cure</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <span class="filter-label">Etapa:</span>
+                        <select class="form-select" id="filter-stage" onchange="filterPipeline()">
+                            <option value="all">Todas</option>
+                            <option value="Pre-feasibility">Pre-feasibility</option>
+                            <option value="Feasibility">Feasibility</option>
+                            <option value="Visita de Calificacion">Visita de Calificacion</option>
+                            <option value="Estudio Adjudicado">Estudio Adjudicado</option>
+                            <option value="Contrato Firmado">Contrato Firmado</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <span class="filter-label">Desde:</span>
+                        <input type="date" class="form-input" id="filter-from" onchange="filterPipeline()">
+                    </div>
+                    <div class="filter-group">
+                        <span class="filter-label">Hasta:</span>
+                        <input type="date" class="form-input" id="filter-to" onchange="filterPipeline()">
+                    </div>
+                </div>
+
+                <div style="overflow-x: auto;">
+                    <table class="crm-table">
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Sponsor</th>
+                                <th>Nombre Estudio</th>
+                                <th>Site</th>
+                                <th>Etapa</th>
+                                <th>Valor Est. ($)</th>
+                                <th>BD Manager</th>
+                                <th class="no-print">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="pipeline-table-body">
+                            <!-- Se llena dinamicamente -->
+                        </tbody>
+                    </table>
+                </div>
+                <p id="no-records" style="text-align: center; padding: 40px; color: var(--gray-500); display: none;">
+                    No hay registros. Agrega tu primer prospecto en "Nuevo Registro".
+                </p>
+            </div>
+        </div>
+
+        <!-- TAB: Nuevo Registro -->
+        <div id="registro" class="tab-content">
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <span class="icon">
+                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                        </span>
+                        Registrar Nueva Oportunidad
+                    </h2>
+                </div>
+
+                <!-- Selector de usuario -->
+                <div class="user-selector">
+                    <button class="user-btn mary active" data-user="Mary Talledo" onclick="selectUser(this)">
+                        <div class="user-avatar">MT</div>
+                        Mary Talledo
+                    </button>
+                    <button class="user-btn javier" data-user="Javier Handal" onclick="selectUser(this)">
+                        <div class="user-avatar">JH</div>
+                        Javier Handal
+                    </button>
+                    <button class="user-btn moises" data-user="Moises Cure" onclick="selectUser(this)">
+                        <div class="user-avatar">MC</div>
+                        Moises Cure
+                    </button>
+                </div>
+
+                <!-- Etapa del pipeline -->
+                <p style="font-size: 12px; font-weight: 600; color: var(--gray-600); margin-bottom: 8px; text-transform: uppercase;">Etapa del Prospecto</p>
+                <div class="pipeline-stages">
+                    <div class="pipeline-stage prefeasibility active" data-stage="Pre-feasibility" onclick="selectStage(this)">Pre-feasibility</div>
+                    <div class="pipeline-stage feasibility" data-stage="Feasibility" onclick="selectStage(this)">Feasibility</div>
+                    <div class="pipeline-stage qualification" data-stage="Visita de Calificacion" onclick="selectStage(this)">Visita de Calificacion</div>
+                    <div class="pipeline-stage awarded" data-stage="Estudio Adjudicado" onclick="selectStage(this)">Estudio Adjudicado</div>
+                    <div class="pipeline-stage contracted" data-stage="Contrato Firmado" onclick="selectStage(this)">Contrato Firmado</div>
+                </div>
+
+                <!-- Formulario -->
+                <form id="opportunity-form" onsubmit="saveOpportunity(event)">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label">Fecha de Registro *</label>
+                            <input type="date" class="form-input" id="reg-date" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Semana</label>
+                            <input type="week" class="form-input" id="reg-week">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Nombre del Sponsor *</label>
+                            <input type="text" class="form-input" id="reg-sponsor" placeholder="Ej: Pfizer, Novartis..." required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">CRO (si aplica)</label>
+                            <input type="text" class="form-input" id="reg-cro" placeholder="Ej: IQVIA, PPD...">
+                        </div>
+                        <div class="form-group half-width">
+                            <label class="form-label">Nombre del Estudio *</label>
+                            <input type="text" class="form-input" id="reg-study" placeholder="Codigo o nombre del protocolo" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Area Terapeutica</label>
+                            <select class="form-select" id="reg-therapeutic">
+                                <option value="">Seleccionar...</option>
+                                <option value="Oncologia">Oncologia</option>
+                                <option value="Cardiologia">Cardiologia</option>
+                                <option value="Neurologia">Neurologia</option>
+                                <option value="Inmunologia">Inmunologia</option>
+                                <option value="Infectologia">Infectologia</option>
+                                <option value="Endocrinologia">Endocrinologia</option>
+                                <option value="Gastroenterologia">Gastroenterologia</option>
+                                <option value="Dermatologia">Dermatologia</option>
+                                <option value="Respiratorio">Respiratorio</option>
+                                <option value="Otra">Otra</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Fase del Estudio</label>
+                            <select class="form-select" id="reg-phase">
+                                <option value="">Seleccionar...</option>
+                                <option value="Phase I">Phase I</option>
+                                <option value="Phase II">Phase II</option>
+                                <option value="Phase III">Phase III</option>
+                                <option value="Phase IV">Phase IV</option>
+                            </select>
+                        </div>
+                        <div class="form-group half-width">
+                            <label class="form-label">Site(s) Propuestos *</label>
+                            <input type="text" class="form-input" id="reg-sites" placeholder="Ej: Lima Site 1, Santiago Site 2..." required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Pais(es)</label>
+                            <input type="text" class="form-input" id="reg-countries" placeholder="Ej: Peru, Chile, Colombia...">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Valor Estimado (USD) *</label>
+                            <input type="number" class="form-input" id="reg-value" placeholder="Ej: 150000" min="0" step="1000" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Pacientes Estimados</label>
+                            <input type="number" class="form-input" id="reg-patients" placeholder="Ej: 50" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Probabilidad (%)</label>
+                            <select class="form-select" id="reg-probability">
+                                <option value="10">10%</option>
+                                <option value="25">25%</option>
+                                <option value="50" selected>50%</option>
+                                <option value="75">75%</option>
+                                <option value="90">90%</option>
+                                <option value="100">100%</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Contacto Principal</label>
+                            <input type="text" class="form-input" id="reg-contact" placeholder="Nombre del contacto">
+                        </div>
+                        <div class="form-group full-width">
+                            <label class="form-label">Notas / Proximos Pasos</label>
+                            <textarea class="form-textarea" id="reg-notes" placeholder="Comentarios, proximas acciones, etc."></textarea>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 12px; justify-content: flex-end;">
+                        <button type="button" class="btn btn-secondary" onclick="clearForm()">Limpiar</button>
+                        <button type="submit" class="btn btn-primary">Guardar Registro</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- TAB: Audit Trail -->
+        <div id="audit" class="tab-content">
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <span class="icon">
+                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg>
+                        </span>
+                        Historial de Cambios (Audit Trail)
+                    </h2>
+                    <button class="btn btn-secondary no-print" onclick="exportAuditTrail()">Exportar Historial</button>
+                </div>
+                <div class="audit-trail" id="audit-trail">
+                    <p style="text-align: center; padding: 40px; color: var(--gray-500);">
+                        No hay registros de actividad aun.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB: Metas 2026 -->
+        <div id="metas" class="tab-content">
+            <!-- Seccion 1: Modelo de Revenue -->
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <span class="icon">
+                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        </span>
+                        Modelo de Revenue - Site Network
+                    </h2>
+                </div>
+
+                <!-- Variables del modelo -->
+                <h4 style="font-size: 14px; font-weight: 700; color: var(--celerity-navy); margin-bottom: 16px;">Supuestos del Modelo de Revenue</h4>
+                <div class="grid-3" style="margin-bottom: 24px;">
+                    <div class="kpi-card" style="border-left: 4px solid var(--celerity-teal);">
+                        <div class="kpi-label">VALOR POR CONTRATO</div>
+                        <div class="kpi-value" style="color: var(--celerity-teal);">$2.500.000</div>
+                        <div class="kpi-change" style="color: var(--gray-600);">Ingreso promedio por estudio adjudicado en un site</div>
+                    </div>
+                    <div class="kpi-card" style="border-left: 4px solid var(--celerity-navy);">
+                        <div class="kpi-label">CASO BASE (para metas)</div>
+                        <div class="kpi-value" style="color: var(--celerity-navy);">1 estudio = 1 site</div>
+                        <div class="kpi-change" style="color: var(--gray-600);">Las metas asumen que cada estudio se activa en 1 site</div>
+                    </div>
+                    <div class="kpi-card" style="border-left: 4px solid var(--success);">
+                        <div class="kpi-label">UPSIDE POTENCIAL</div>
+                        <div class="kpi-value" style="color: var(--success);">1 estudio → 2-3 sites</div>
+                        <div class="kpi-change" style="color: var(--gray-600);">Si se expande a mas sites, el revenue se multiplica</div>
+                    </div>
+                </div>
+
+                <div style="background: #EFF6FF; border-radius: 12px; padding: 16px; border-left: 4px solid var(--celerity-navy);">
+                    <p style="font-size: 13px; color: var(--celerity-navy); margin: 0;">
+                        <strong>Ejemplo:</strong> Si un BD gana 1 estudio y lo despliega en 2 sites de la red, genera $2.5M × 2 = $5M de revenue, cumpliendo su meta con un solo estudio ganado.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Seccion 2: Metas por BD Manager -->
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <span class="icon">
+                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                        </span>
+                        Metas 2026 por BD Manager
+                    </h2>
+                </div>
+
+                <div style="overflow-x: auto;">
+                    <table class="crm-table">
+                        <thead>
+                            <tr>
+                                <th>KPI</th>
+                                <th>Benchmark</th>
+                                <th>Mary Talledo<br><small style="font-weight:400;">LATAM</small></th>
+                                <th>Javier Handal<br><small style="font-weight:400;">USA/Canada</small></th>
+                                <th>Moises Cure<br><small style="font-weight:400;">Europa/Asia</small></th>
+                                <th>Total Equipo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="background: linear-gradient(90deg, rgba(232,117,108,0.1), transparent);">
+                                <td class="metric-name"><strong>REVENUE TARGET</strong></td>
+                                <td>-</td>
+                                <td><span class="amount" style="font-size: 16px;">$5.000.000</span></td>
+                                <td><span class="amount" style="font-size: 16px;">$5.000.000</span></td>
+                                <td><span class="amount" style="font-size: 16px;">$5.000.000</span></td>
+                                <td><span class="amount" style="font-size: 16px;">$15.000.000</span></td>
+                            </tr>
+                            <tr>
+                                <td class="metric-name">Valor Promedio por Contrato</td>
+                                <td><span class="stage-badge qualification">$2.5M USD</span></td>
+                                <td>$2.500.000</td>
+                                <td>$2.500.000</td>
+                                <td>$2.500.000</td>
+                                <td>$2.500.000</td>
+                            </tr>
+                            <tr>
+                                <td class="metric-name">Estudios Requeridos (Caso Base)</td>
+                                <td>Revenue / Valor Contrato</td>
+                                <td><strong>2 estudios</strong></td>
+                                <td><strong>2 estudios</strong></td>
+                                <td><strong>2 estudios</strong></td>
+                                <td><strong>6 estudios</strong></td>
+                            </tr>
+                            <tr>
+                                <td class="metric-name">Win Rate (por valor)</td>
+                                <td><span class="stage-badge qualification">18-25%</span></td>
+                                <td>25%</td>
+                                <td>22%</td>
+                                <td>20%</td>
+                                <td>~22%</td>
+                            </tr>
+                            <tr>
+                                <td class="metric-name">Valor Propuestas Requerido</td>
+                                <td>Revenue / Win Rate</td>
+                                <td><span class="amount">$20.000.000</span></td>
+                                <td><span class="amount">$22.700.000</span></td>
+                                <td><span class="amount">$25.000.000</span></td>
+                                <td><span class="amount">$67.700.000</span></td>
+                            </tr>
+                            <tr>
+                                <td class="metric-name">Propuestas/Año (@$2.5M c/u)</td>
+                                <td>Valor Prop / $2.5M</td>
+                                <td>~8</td>
+                                <td>~9</td>
+                                <td>~10</td>
+                                <td>~27</td>
+                            </tr>
+                            <tr>
+                                <td class="metric-name">Pipeline Activo (3x coverage)</td>
+                                <td><span class="stage-badge qualification">3x revenue</span></td>
+                                <td><span class="amount">$15.000.000</span></td>
+                                <td><span class="amount">$15.000.000</span></td>
+                                <td><span class="amount">$15.000.000</span></td>
+                                <td><span class="amount">$45.000.000</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Seccion 3: Caso Base vs Upside -->
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <span class="icon">
+                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                        </span>
+                        Escenarios: Caso Base vs Upside (Ejemplo: Meta $5M)
+                    </h2>
+                </div>
+
+                <div class="grid-2" style="margin-bottom: 24px;">
+                    <!-- Caso Base -->
+                    <div style="background: var(--gray-50); border-radius: 12px; padding: 24px; border: 3px solid var(--celerity-navy);">
+                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px;">
+                            <span style="background: var(--celerity-navy); color: white; padding: 6px 14px; border-radius: 6px; font-size: 12px; font-weight: 700;">CASO BASE</span>
+                            <span style="font-size: 13px; color: var(--gray-600);">Escenario conservador</span>
+                        </div>
+                        <div style="font-size: 14px; color: var(--gray-700); margin-bottom: 16px;">
+                            <strong>Supuesto:</strong> 1 estudio = 1 site (sin expansión)
+                        </div>
+                        <div style="background: white; border-radius: 8px; padding: 16px; margin-bottom: 12px;">
+                            <div style="font-size: 12px; color: var(--gray-500); margin-bottom: 4px;">Para lograr $5M:</div>
+                            <div style="font-size: 32px; font-weight: 800; color: var(--celerity-navy);">2 estudios</div>
+                            <div style="font-size: 13px; color: var(--gray-600);">2 estudios × 1 site × $2.5M = <strong>$5.0M</strong></div>
+                        </div>
+                        <div style="font-size: 12px; color: var(--gray-500); line-height: 1.6;">
+                            Cada estudio ganado activa 1 site.<br>
+                            Este es el escenario para planificación de metas.
+                        </div>
+                    </div>
+
+                    <!-- Upside -->
+                    <div style="background: linear-gradient(135deg, rgba(16,185,129,0.1), rgba(16,185,129,0.05)); border-radius: 12px; padding: 24px; border: 3px solid #10B981;">
+                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px;">
+                            <span style="background: #10B981; color: white; padding: 6px 14px; border-radius: 6px; font-size: 12px; font-weight: 700;">UPSIDE POTENCIAL</span>
+                            <span style="font-size: 13px; color: var(--gray-600);">Beneficio de la red</span>
+                        </div>
+                        <div style="font-size: 14px; color: var(--gray-700); margin-bottom: 16px;">
+                            <strong>Supuesto:</strong> 1 estudio → 2-3 sites (expansión lograda)
+                        </div>
+                        <div style="background: white; border-radius: 8px; padding: 16px; margin-bottom: 12px;">
+                            <div style="font-size: 12px; color: var(--gray-500); margin-bottom: 4px;">Para lograr $5M (o más):</div>
+                            <div style="font-size: 32px; font-weight: 800; color: #10B981;">1 estudio</div>
+                            <div style="font-size: 13px; color: var(--gray-600);">1 estudio × 2 sites × $2.5M = <strong>$5.0M</strong></div>
+                        </div>
+                        <div style="font-size: 12px; color: var(--gray-500); line-height: 1.6;">
+                            Menos estudios necesarios si se logra expansión.<br>
+                            <strong>Este es el valor diferencial del Site Network.</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabla comparativa -->
+                <h4 style="font-size: 14px; font-weight: 700; color: var(--celerity-navy); margin-bottom: 12px;">Comparativa: Mismo Revenue ($5M), Diferentes Caminos</h4>
+                <div style="overflow-x: auto;">
+                    <table class="crm-table">
+                        <thead>
+                            <tr>
+                                <th>Escenario</th>
+                                <th>Estudios Ganados</th>
+                                <th>Sites por Estudio</th>
+                                <th>Sites Totales</th>
+                                <th>Revenue</th>
+                                <th>Dificultad BD</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="stage-badge" style="background: #1B4965; color: white;">Caso Base</span></td>
+                                <td><strong>2</strong></td>
+                                <td>1</td>
+                                <td>2</td>
+                                <td><span class="amount">$5.000.000</span></td>
+                                <td style="color: #F59E0B;">Media (2 wins)</td>
+                            </tr>
+                            <tr style="background: rgba(16,185,129,0.1);">
+                                <td><span class="stage-badge" style="background: #10B981; color: white;">Upside Logrado</span></td>
+                                <td><strong>1</strong></td>
+                                <td>2</td>
+                                <td>2</td>
+                                <td><span class="amount">$5.000.000</span></td>
+                                <td style="color: #10B981;">Baja (1 win)</td>
+                            </tr>
+                            <tr style="background: rgba(16,185,129,0.2);">
+                                <td><span class="stage-badge" style="background: #059669; color: white;">Upside Máximo</span></td>
+                                <td><strong>1</strong></td>
+                                <td>3</td>
+                                <td>3</td>
+                                <td><span class="amount">$7.500.000</span></td>
+                                <td style="color: #059669;">Supera meta (+50%)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div style="background: linear-gradient(135deg, var(--celerity-navy), var(--celerity-navy-dark)); border-radius: 12px; padding: 20px; color: white; margin-top: 24px;">
+                    <h4 style="font-size: 14px; margin-bottom: 8px;">Estrategia del Site Network</h4>
+                    <p style="font-size: 13px; opacity: 0.95; line-height: 1.7;">
+                        <strong>Las metas se calculan en CASO BASE (1 estudio = 1 site).</strong><br><br>
+                        El valor del Site Network es que cuando se logra expandir un estudio a multiples sites:<br>
+                        • Se reduce el numero de "wins" necesarios para cumplir la meta<br>
+                        • Se maximiza el valor de cada oportunidad ganada<br>
+                        • El BD puede superar su meta con menos esfuerzo de prospeccion<br><br>
+                        <strong>La expansion es un PREMIO, no una expectativa base.</strong>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Seccion 4: Funnel de Conversion -->
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <span class="icon">
+                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>
+                        </span>
+                        Funnel de Conversion - Equipo BD 2026
+                    </h2>
+                </div>
+
+                <p style="color: var(--gray-600); margin-bottom: 24px; font-size: 14px;">
+                    Calculo inverso: Desde el revenue target, cuantas oportunidades necesita generar el equipo?
+                </p>
+
+                <!-- Embudo Visual -->
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 0; max-width: 700px; margin: 0 auto;">
+
+                    <!-- Nivel 1: Pipeline (mas ancho) -->
+                    <div style="width: 100%; background: linear-gradient(135deg, #6366F1, #818CF8); padding: 20px 30px; color: white; text-align: center; border-radius: 12px 12px 0 0; position: relative;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div style="text-align: left;">
+                                <div style="font-size: 12px; text-transform: uppercase; opacity: 0.8; margin-bottom: 4px;">Pipeline Requerido</div>
+                                <div style="font-size: 11px; opacity: 0.7;">3x coverage del revenue target</div>
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="font-size: 32px; font-weight: 800;">$45M</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Conector -->
+                    <div style="width: 90%; height: 0; border-left: 25px solid transparent; border-right: 25px solid transparent; border-top: 15px solid #818CF8;"></div>
+
+                    <!-- Nivel 2: Propuestas Valor -->
+                    <div style="width: 90%; background: linear-gradient(135deg, #8B5CF6, #A78BFA); padding: 18px 28px; color: white; text-align: center; position: relative;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div style="text-align: left;">
+                                <div style="font-size: 12px; text-transform: uppercase; opacity: 0.8; margin-bottom: 4px;">Valor en Propuestas</div>
+                                <div style="font-size: 11px; opacity: 0.7;">Para lograr 22% win rate</div>
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="font-size: 28px; font-weight: 800;">$68M</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Conector -->
+                    <div style="width: 80%; height: 0; border-left: 25px solid transparent; border-right: 25px solid transparent; border-top: 15px solid #A78BFA;"></div>
+
+                    <!-- Nivel 3: Cantidad Propuestas -->
+                    <div style="width: 80%; background: linear-gradient(135deg, #F59E0B, #FBBF24); padding: 18px 26px; color: white; text-align: center; position: relative;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div style="text-align: left;">
+                                <div style="font-size: 12px; text-transform: uppercase; opacity: 0.8; margin-bottom: 4px;">Propuestas a Enviar</div>
+                                <div style="font-size: 11px; opacity: 0.7;">~9 por BD @ $2.5M c/u</div>
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="font-size: 28px; font-weight: 800;">~27</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Conector -->
+                    <div style="width: 70%; height: 0; border-left: 25px solid transparent; border-right: 25px solid transparent; border-top: 15px solid #FBBF24;"></div>
+
+                    <!-- Nivel 4: Estudios Ganados -->
+                    <div style="width: 70%; background: linear-gradient(135deg, #10B981, #34D399); padding: 18px 24px; color: white; text-align: center; position: relative;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div style="text-align: left;">
+                                <div style="font-size: 12px; text-transform: uppercase; opacity: 0.8; margin-bottom: 4px;">Estudios a Ganar</div>
+                                <div style="font-size: 11px; opacity: 0.7;">2 por BD @ $2.5M c/u</div>
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="font-size: 28px; font-weight: 800;">6</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Conector -->
+                    <div style="width: 55%; height: 0; border-left: 25px solid transparent; border-right: 25px solid transparent; border-top: 15px solid #34D399;"></div>
+
+                    <!-- Nivel 5: Revenue (mas angosto - fondo del embudo) -->
+                    <div style="width: 55%; background: linear-gradient(135deg, var(--celerity-coral), var(--celerity-coral-light)); padding: 22px 24px; color: white; text-align: center; border-radius: 0 0 12px 12px; position: relative;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div style="text-align: left;">
+                                <div style="font-size: 12px; text-transform: uppercase; opacity: 0.8; margin-bottom: 4px;">Revenue Target</div>
+                                <div style="font-size: 11px; opacity: 0.7;">Meta del equipo 2026</div>
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="font-size: 32px; font-weight: 800;">$15M</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Leyenda de tasas de conversion -->
+                <div style="display: flex; justify-content: center; gap: 24px; margin-top: 24px; flex-wrap: wrap;">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <div style="width: 12px; height: 12px; background: #8B5CF6; border-radius: 3px;"></div>
+                        <span style="font-size: 12px; color: var(--gray-600);">Win Rate: 22%</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <div style="width: 12px; height: 12px; background: #F59E0B; border-radius: 3px;"></div>
+                        <span style="font-size: 12px; color: var(--gray-600);">Valor/Propuesta: $2.5M</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <div style="width: 12px; height: 12px; background: #10B981; border-radius: 3px;"></div>
+                        <span style="font-size: 12px; color: var(--gray-600);">Coverage: 3x</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal de Reportes -->
+        <div class="modal-overlay" id="report-modal">
+            <div class="modal">
+                <div class="modal-header">
+                    <h3 class="modal-title">Generar Reporte de Avance</h3>
+                    <button class="modal-close" onclick="closeReportModal()">&times;</button>
+                </div>
+                <div class="form-grid" style="grid-template-columns: repeat(2, 1fr);">
+                    <div class="form-group">
+                        <label class="form-label">Tipo de Reporte</label>
+                        <select class="form-select" id="report-type">
+                            <option value="weekly">Semanal</option>
+                            <option value="monthly">Mensual</option>
+                            <option value="quarterly">Trimestral</option>
+                            <option value="yearly">Anual</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">BD Manager</label>
+                        <select class="form-select" id="report-manager">
+                            <option value="all">Todos</option>
+                            <option value="Mary Talledo">Mary Talledo</option>
+                            <option value="Javier Handal">Javier Handal</option>
+                            <option value="Moises Cure">Moises Cure</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Desde</label>
+                        <input type="date" class="form-input" id="report-from">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Hasta</label>
+                        <input type="date" class="form-input" id="report-to">
+                    </div>
+                </div>
+                <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 20px;">
+                    <button class="btn btn-secondary" onclick="closeReportModal()">Cancelar</button>
+                    <button class="btn btn-primary" onclick="generateReport()">Generar Reporte</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal de Edicion -->
+        <div class="modal-overlay" id="edit-modal">
+            <div class="modal">
+                <div class="modal-header">
+                    <h3 class="modal-title">Editar Oportunidad</h3>
+                    <button class="modal-close" onclick="closeEditModal()">&times;</button>
+                </div>
+                <form id="edit-form" onsubmit="updateOpportunity(event)">
+                    <input type="hidden" id="edit-id">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label">Fecha</label>
+                            <input type="date" class="form-input" id="edit-date" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Sponsor</label>
+                            <input type="text" class="form-input" id="edit-sponsor" required>
+                        </div>
+                        <div class="form-group half-width">
+                            <label class="form-label">Nombre del Estudio</label>
+                            <input type="text" class="form-input" id="edit-study" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Site(s)</label>
+                            <input type="text" class="form-input" id="edit-sites" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Etapa</label>
+                            <select class="form-select" id="edit-stage">
+                                <option value="Pre-feasibility">Pre-feasibility</option>
+                                <option value="Feasibility">Feasibility</option>
+                                <option value="Visita de Calificacion">Visita de Calificacion</option>
+                                <option value="Estudio Adjudicado">Estudio Adjudicado</option>
+                                <option value="Contrato Firmado">Contrato Firmado</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Valor Estimado ($)</label>
+                            <input type="number" class="form-input" id="edit-value" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">BD Manager</label>
+                            <select class="form-select" id="edit-manager">
+                                <option value="Mary Talledo">Mary Talledo</option>
+                                <option value="Javier Handal">Javier Handal</option>
+                                <option value="Moises Cure">Moises Cure</option>
+                            </select>
+                        </div>
+                        <div class="form-group full-width">
+                            <label class="form-label">Notas</label>
+                            <textarea class="form-textarea" id="edit-notes"></textarea>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 20px;">
+                        <button type="button" class="btn btn-secondary" onclick="closeEditModal()">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ========== GOOGLE SHEETS API ==========
+        const API_URL = 'https://script.google.com/macros/s/AKfycby-uddKhEFhCXcUmfYtVGKvQOc_yryq26doiniNhxiISUXdctGbMbjuD7r6R7S1QQcQ5w/exec';
+
+        // ========== DATA STORAGE ==========
+        let opportunities = [];
+        let auditLog = [];
+        let selectedUser = 'Mary Talledo';
+        let selectedStage = 'Pre-feasibility';
+        let isLoading = false;
+
+        // ========== API FUNCTIONS ==========
+        async function loadDataFromSheets() {
+            try {
+                showLoading(true);
+
+                // Cargar Pipeline
+                const pipelineResponse = await fetch(`${API_URL}?action=read`);
+                const pipelineData = await pipelineResponse.json();
+
+                if (pipelineData.success && pipelineData.data) {
+                    opportunities = pipelineData.data.map(row => ({
+                        id: row['ID'] || row['id'],
+                        date: row['Fecha'] || row['fecha'] || '',
+                        sponsor: row['Sponsor'] || row['sponsor'] || '',
+                        study: row['Estudio'] || row['estudio'] || '',
+                        sites: row['Site'] || row['site'] || '',
+                        stage: row['Etapa'] || row['etapa'] || 'Pre-feasibility',
+                        value: parseFloat(row['Valor'] || row['valor'] || 0),
+                        probability: parseInt(row['Probabilidad'] || row['probabilidad'] || 50),
+                        contact: row['Contacto'] || row['contacto'] || '',
+                        notes: row['Notas'] || row['notas'] || '',
+                        manager: row['BD_Manager'] || row['bd_manager'] || 'Mary Talledo'
+                    }));
+                }
+
+                // Cargar Audit
+                const auditResponse = await fetch(`${API_URL}?action=audit`);
+                const auditData = await auditResponse.json();
+
+                if (auditData.success && auditData.data) {
+                    auditLog = auditData.data.map(row => ({
+                        id: row['Timestamp'] || Date.now(),
+                        type: (row['Accion'] || 'update').toLowerCase(),
+                        title: row['Detalles'] || '',
+                        user: row['Usuario'] || 'Sistema',
+                        details: { registroId: row['Registro_ID'] },
+                        timestamp: row['Timestamp'] || new Date().toISOString()
+                    }));
+                }
+
+                showLoading(false);
+                updateDashboard();
+                renderPipelineTable();
+                renderAuditTrail();
+
+            } catch (error) {
+                console.error('Error cargando datos:', error);
+                showLoading(false);
+                showNotification('Error al cargar datos de Google Sheets', 'error');
+            }
+        }
+
+        async function createRecordInSheets(data) {
+            try {
+                const params = new URLSearchParams({
+                    action: 'create',
+                    bd_manager: data.manager,
+                    sponsor: data.sponsor,
+                    estudio: data.study,
+                    site: data.sites,
+                    etapa: data.stage,
+                    valor: data.value,
+                    probabilidad: data.probability || 50,
+                    contacto: data.contact || '',
+                    notas: data.notes || ''
+                });
+
+                const response = await fetch(`${API_URL}?${params.toString()}`);
+                const result = await response.json();
+                return result;
+            } catch (error) {
+                console.error('Error creando registro:', error);
+                throw error;
+            }
+        }
+
+        async function updateRecordInSheets(data) {
+            try {
+                const params = new URLSearchParams({
+                    action: 'update',
+                    id: data.id,
+                    bd_manager: data.manager,
+                    sponsor: data.sponsor,
+                    estudio: data.study,
+                    site: data.sites,
+                    etapa: data.stage,
+                    valor: data.value,
+                    probabilidad: data.probability || 50,
+                    contacto: data.contact || '',
+                    notas: data.notes || ''
+                });
+
+                const response = await fetch(`${API_URL}?${params.toString()}`);
+                const result = await response.json();
+                return result;
+            } catch (error) {
+                console.error('Error actualizando registro:', error);
+                throw error;
+            }
+        }
+
+        async function deleteRecordFromSheets(id) {
+            try {
+                const params = new URLSearchParams({
+                    action: 'delete',
+                    id: id
+                });
+
+                const response = await fetch(`${API_URL}?${params.toString()}`);
+                const result = await response.json();
+                return result;
+            } catch (error) {
+                console.error('Error eliminando registro:', error);
+                throw error;
+            }
+        }
+
+        function showLoading(show) {
+            isLoading = show;
+            const existingOverlay = document.getElementById('loading-overlay');
+
+            if (show) {
+                if (!existingOverlay) {
+                    const overlay = document.createElement('div');
+                    overlay.id = 'loading-overlay';
+                    overlay.innerHTML = `
+                        <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(255,255,255,0.8); display: flex; align-items: center; justify-content: center; z-index: 9999;">
+                            <div style="text-align: center;">
+                                <div style="width: 50px; height: 50px; border: 4px solid #e5e7eb; border-top-color: #3b82f6; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+                                <p style="margin-top: 16px; color: #374151; font-weight: 500;">Cargando datos...</p>
+                            </div>
+                        </div>
+                        <style>@keyframes spin { to { transform: rotate(360deg); } }</style>
+                    `;
+                    document.body.appendChild(overlay);
+                }
+            } else {
+                if (existingOverlay) {
+                    existingOverlay.remove();
+                }
+            }
+        }
+
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed; top: 20px; right: 20px; padding: 16px 24px; border-radius: 8px;
+                color: white; font-weight: 500; z-index: 10000; animation: slideIn 0.3s ease;
+                background: ${type === 'error' ? '#ef4444' : '#10b981'};
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            setTimeout(() => notification.remove(), 3000);
+        }
+
+        // ========== INITIALIZATION ==========
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set default date
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('reg-date').value = today;
+
+            // Set current week
+            const weekInput = document.getElementById('reg-week');
+            const currentDate = new Date();
+            const year = currentDate.getFullYear();
+            const week = getWeekNumber(currentDate);
+            weekInput.value = `${year}-W${week.toString().padStart(2, '0')}`;
+
+            // Cargar datos desde Google Sheets
+            loadDataFromSheets();
+        });
+
+        function getWeekNumber(date) {
+            const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+            const dayNum = d.getUTCDay() || 7;
+            d.setUTCDate(d.getUTCDate() + 4 - dayNum);
+            const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+            return Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
+        }
+
+        // ========== NUMBER FORMATTING ==========
+        function formatNumber(num) {
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
+
+        function formatCurrency(num) {
+            return '$' + formatNumber(Math.round(num));
+        }
+
+        // ========== TAB NAVIGATION ==========
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.nav-tab').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // ========== USER & STAGE SELECTION ==========
+        function selectUser(btn) {
+            document.querySelectorAll('.user-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            selectedUser = btn.dataset.user;
+        }
+
+        function selectStage(stage) {
+            document.querySelectorAll('.pipeline-stage').forEach(s => s.classList.remove('active'));
+            stage.classList.add('active');
+            selectedStage = stage.dataset.stage;
+        }
+
+        // ========== OPPORTUNITY CRUD ==========
+        async function saveOpportunity(e) {
+            e.preventDefault();
+
+            if (isLoading) return;
+
+            const opportunity = {
+                date: document.getElementById('reg-date').value,
+                week: document.getElementById('reg-week').value,
+                sponsor: document.getElementById('reg-sponsor').value,
+                cro: document.getElementById('reg-cro').value,
+                study: document.getElementById('reg-study').value,
+                therapeutic: document.getElementById('reg-therapeutic').value,
+                phase: document.getElementById('reg-phase').value,
+                sites: document.getElementById('reg-sites').value,
+                countries: document.getElementById('reg-countries').value,
+                value: parseFloat(document.getElementById('reg-value').value) || 0,
+                patients: parseInt(document.getElementById('reg-patients').value) || 0,
+                probability: parseInt(document.getElementById('reg-probability').value),
+                contact: document.getElementById('reg-contact').value,
+                notes: document.getElementById('reg-notes').value,
+                stage: selectedStage,
+                manager: selectedUser
+            };
+
+            try {
+                showLoading(true);
+                const result = await createRecordInSheets(opportunity);
+
+                if (result.success) {
+                    showNotification('Registro guardado exitosamente!');
+                    clearForm();
+                    await loadDataFromSheets();
+                    showTab('pipeline');
+                    document.querySelector('.nav-tab:nth-child(2)').classList.add('active');
+                    document.querySelector('.nav-tab:nth-child(1)').classList.remove('active');
+                } else {
+                    showNotification('Error al guardar: ' + (result.message || 'Error desconocido'), 'error');
+                }
+            } catch (error) {
+                showNotification('Error de conexion con Google Sheets', 'error');
+                console.error(error);
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        function editOpportunity(id) {
+            const opp = opportunities.find(o => o.id === id);
+            if (!opp) return;
+
+            document.getElementById('edit-id').value = opp.id;
+            document.getElementById('edit-date').value = opp.date;
+            document.getElementById('edit-sponsor').value = opp.sponsor;
+            document.getElementById('edit-study').value = opp.study;
+            document.getElementById('edit-sites').value = opp.sites;
+            document.getElementById('edit-stage').value = opp.stage;
+            document.getElementById('edit-value').value = opp.value;
+            document.getElementById('edit-manager').value = opp.manager;
+            document.getElementById('edit-notes').value = opp.notes || '';
+
+            document.getElementById('edit-modal').classList.add('active');
+        }
+
+        async function updateOpportunity(e) {
+            e.preventDefault();
+
+            if (isLoading) return;
+
+            const id = document.getElementById('edit-id').value;
+            const opp = opportunities.find(o => o.id === id || o.id == id);
+            if (!opp) {
+                showNotification('Registro no encontrado', 'error');
+                return;
+            }
+
+            const updatedData = {
+                id: id,
+                date: document.getElementById('edit-date').value,
+                sponsor: document.getElementById('edit-sponsor').value,
+                study: document.getElementById('edit-study').value,
+                sites: document.getElementById('edit-sites').value,
+                stage: document.getElementById('edit-stage').value,
+                value: parseFloat(document.getElementById('edit-value').value),
+                manager: document.getElementById('edit-manager').value,
+                notes: document.getElementById('edit-notes').value,
+                probability: opp.probability || 50,
+                contact: opp.contact || ''
+            };
+
+            try {
+                showLoading(true);
+                const result = await updateRecordInSheets(updatedData);
+
+                if (result.success) {
+                    showNotification('Registro actualizado exitosamente!');
+                    closeEditModal();
+                    await loadDataFromSheets();
+                } else {
+                    showNotification('Error al actualizar: ' + (result.message || 'Error desconocido'), 'error');
+                }
+            } catch (error) {
+                showNotification('Error de conexion con Google Sheets', 'error');
+                console.error(error);
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        async function deleteOpportunity(id) {
+            if (!confirm('¿Estas seguro de eliminar este registro?')) return;
+
+            if (isLoading) return;
+
+            try {
+                showLoading(true);
+                const result = await deleteRecordFromSheets(id);
+
+                if (result.success) {
+                    showNotification('Registro eliminado exitosamente!');
+                    await loadDataFromSheets();
+                } else {
+                    showNotification('Error al eliminar: ' + (result.message || 'Error desconocido'), 'error');
+                }
+            } catch (error) {
+                showNotification('Error de conexion con Google Sheets', 'error');
+                console.error(error);
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        function clearForm() {
+            document.getElementById('opportunity-form').reset();
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('reg-date').value = today;
+            document.getElementById('reg-probability').value = '50';
+        }
+
+        // ========== AUDIT TRAIL ==========
+        // Nota: El audit se registra automaticamente en Google Sheets desde el servidor
+
+        function renderAuditTrail() {
+            const container = document.getElementById('audit-trail');
+            if (auditLog.length === 0) {
+                container.innerHTML = '<p style="text-align: center; padding: 40px; color: var(--gray-500);">No hay registros de actividad aun.</p>';
+                return;
+            }
+
+            const iconMap = {
+                crear: { class: 'create', icon: '+' },
+                create: { class: 'create', icon: '+' },
+                actualizar: { class: 'update', icon: '✎' },
+                update: { class: 'update', icon: '✎' },
+                eliminar: { class: 'delete', icon: '×' },
+                delete: { class: 'delete', icon: '×' },
+                stage: { class: 'stage', icon: '→' }
+            };
+
+            container.innerHTML = auditLog.map(entry => {
+                const type = (entry.type || 'update').toLowerCase();
+                const icon = iconMap[type] || iconMap.update;
+
+                let formattedDate = '';
+                let formattedTime = '';
+
+                try {
+                    const date = new Date(entry.timestamp);
+                    if (!isNaN(date.getTime())) {
+                        formattedDate = date.toLocaleDateString('es-ES', { day: '2-digit', month: 'short', year: 'numeric' });
+                        formattedTime = date.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+                    }
+                } catch (e) {
+                    formattedDate = entry.timestamp || '';
+                }
+
+                let detailsStr = '';
+                if (entry.details) {
+                    if (entry.details.changes) detailsStr = entry.details.changes;
+                    else if (entry.details.value) detailsStr = `Valor: ${formatCurrency(entry.details.value)}`;
+                    else if (entry.details.registroId) detailsStr = `ID: ${entry.details.registroId}`;
+                }
+
+                return `
+                    <div class="audit-item">
+                        <div class="audit-icon ${icon.class}">${icon.icon}</div>
+                        <div class="audit-content">
+                            <div class="audit-title">${entry.title || 'Accion registrada'}</div>
+                            <div class="audit-details">Por: ${entry.user || 'Sistema'}${detailsStr ? ' | ' + detailsStr : ''}</div>
+                        </div>
+                        <div class="audit-time">${formattedDate}<br>${formattedTime}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // ========== DASHBOARD UPDATE ==========
+        function updateDashboard() {
+            // Calculate totals
+            const contracted = opportunities.filter(o => o.stage === 'Contrato Firmado');
+            const totalRevenue = contracted.reduce((sum, o) => sum + o.value, 0);
+            const totalStudies = contracted.length;
+
+            const activeStages = ['Pre-feasibility', 'Feasibility', 'Visita de Calificacion', 'Estudio Adjudicado'];
+            const activePipeline = opportunities.filter(o => activeStages.includes(o.stage));
+            const pipelineValue = activePipeline.reduce((sum, o) => sum + o.value, 0);
+
+            const allProposals = opportunities.filter(o => o.stage !== 'Pre-feasibility');
+            const winRate = allProposals.length > 0 ? (contracted.length / allProposals.length * 100).toFixed(0) : 0;
+
+            const leads = opportunities.filter(o => ['Pre-feasibility', 'Feasibility'].includes(o.stage)).length;
+
+            // Update KPIs
+            document.getElementById('kpi-revenue').textContent = formatCurrency(totalRevenue);
+            document.getElementById('kpi-estudios').textContent = totalStudies;
+            document.getElementById('kpi-pipeline').textContent = formatCurrency(pipelineValue);
+            document.getElementById('kpi-winrate').textContent = winRate + '%';
+            document.getElementById('kpi-leads').textContent = leads;
+
+            // Update by manager
+            ['Mary Talledo', 'Javier Handal', 'Moises Cure'].forEach(manager => {
+                const managerOpps = opportunities.filter(o => o.manager === manager);
+                const managerContracted = managerOpps.filter(o => o.stage === 'Contrato Firmado');
+                const prefix = manager.split(' ')[0].toLowerCase();
+                document.getElementById(`${prefix}-revenue`).textContent = formatCurrency(managerContracted.reduce((s, o) => s + o.value, 0));
+                document.getElementById(`${prefix}-studies`).textContent = managerContracted.length;
+            });
+
+            // Update stages
+            const stages = {
+                'Pre-feasibility': 'prefeasibility',
+                'Feasibility': 'feasibility',
+                'Visita de Calificacion': 'qualification',
+                'Estudio Adjudicado': 'awarded',
+                'Contrato Firmado': 'contracted'
+            };
+
+            Object.entries(stages).forEach(([stage, id]) => {
+                const stageOpps = opportunities.filter(o => o.stage === stage);
+                document.getElementById(`stage-${id}`).textContent = stageOpps.length;
+                document.getElementById(`stage-${id}-value`).textContent = formatCurrency(stageOpps.reduce((s, o) => s + o.value, 0));
+            });
+        }
+
+        // ========== PIPELINE TABLE ==========
+        function renderPipelineTable() {
+            const tbody = document.getElementById('pipeline-table-body');
+            const noRecords = document.getElementById('no-records');
+
+            let filtered = [...opportunities];
+
+            // Apply filters
+            const managerFilter = document.getElementById('filter-manager')?.value;
+            const stageFilter = document.getElementById('filter-stage')?.value;
+            const fromFilter = document.getElementById('filter-from')?.value;
+            const toFilter = document.getElementById('filter-to')?.value;
+
+            if (managerFilter && managerFilter !== 'all') {
+                filtered = filtered.filter(o => o.manager === managerFilter);
+            }
+            if (stageFilter && stageFilter !== 'all') {
+                filtered = filtered.filter(o => o.stage === stageFilter);
+            }
+            if (fromFilter) {
+                filtered = filtered.filter(o => o.date >= fromFilter);
+            }
+            if (toFilter) {
+                filtered = filtered.filter(o => o.date <= toFilter);
+            }
+
+            // Sort by date desc
+            filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            if (filtered.length === 0) {
+                tbody.innerHTML = '';
+                noRecords.style.display = 'block';
+                return;
+            }
+
+            noRecords.style.display = 'none';
+
+            const stageClasses = {
+                'Pre-feasibility': 'prefeasibility',
+                'Feasibility': 'feasibility',
+                'Visita de Calificacion': 'qualification',
+                'Estudio Adjudicado': 'awarded',
+                'Contrato Firmado': 'contracted'
+            };
+
+            tbody.innerHTML = filtered.map(opp => `
+                <tr>
+                    <td>${new Date(opp.date).toLocaleDateString('es-ES')}</td>
+                    <td>${opp.sponsor}</td>
+                    <td><strong>${opp.study}</strong></td>
+                    <td>${opp.sites}</td>
+                    <td><span class="stage-badge ${stageClasses[opp.stage]}">${opp.stage}</span></td>
+                    <td class="amount">${formatCurrency(opp.value)}</td>
+                    <td>${opp.manager}</td>
+                    <td class="no-print">
+                        <button class="action-btn edit" onclick="editOpportunity(${opp.id})">Editar</button>
+                        <button class="action-btn delete" onclick="deleteOpportunity(${opp.id})">Eliminar</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function filterPipeline() {
+            renderPipelineTable();
+        }
+
+        // ========== MODALS ==========
+        function openReportModal() {
+            const today = new Date();
+            const firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
+            document.getElementById('report-from').value = firstDay.toISOString().split('T')[0];
+            document.getElementById('report-to').value = today.toISOString().split('T')[0];
+            document.getElementById('report-modal').classList.add('active');
+        }
+
+        function closeReportModal() {
+            document.getElementById('report-modal').classList.remove('active');
+        }
+
+        function closeEditModal() {
+            document.getElementById('edit-modal').classList.remove('active');
+        }
+
+        // ========== REPORTS ==========
+        function generateReport() {
+            const type = document.getElementById('report-type').value;
+            const manager = document.getElementById('report-manager').value;
+            const from = document.getElementById('report-from').value;
+            const to = document.getElementById('report-to').value;
+
+            let filtered = opportunities.filter(o => {
+                if (manager !== 'all' && o.manager !== manager) return false;
+                if (from && o.date < from) return false;
+                if (to && o.date > to) return false;
+                return true;
+            });
+
+            const contracted = filtered.filter(o => o.stage === 'Contrato Firmado');
+            const revenue = contracted.reduce((s, o) => s + o.value, 0);
+            const pipeline = filtered.filter(o => o.stage !== 'Contrato Firmado').reduce((s, o) => s + o.value, 0);
+
+            const typeLabels = {
+                weekly: 'Semanal',
+                monthly: 'Mensual',
+                quarterly: 'Trimestral',
+                yearly: 'Anual'
+            };
+
+            const report = `
+REPORTE ${typeLabels[type].toUpperCase()} - CELERITY BD
+========================================
+Periodo: ${from} al ${to}
+BD Manager: ${manager === 'all' ? 'Todos' : manager}
+
+RESUMEN:
+- Total Oportunidades: ${filtered.length}
+- Contratos Firmados: ${contracted.length}
+- Revenue Cerrado: ${formatCurrency(revenue)}
+- Pipeline Activo: ${formatCurrency(pipeline)}
+
+POR ETAPA:
+- Pre-feasibility: ${filtered.filter(o => o.stage === 'Pre-feasibility').length}
+- Feasibility: ${filtered.filter(o => o.stage === 'Feasibility').length}
+- Visita Calificacion: ${filtered.filter(o => o.stage === 'Visita de Calificacion').length}
+- Adjudicados: ${filtered.filter(o => o.stage === 'Estudio Adjudicado').length}
+- Contrato Firmado: ${contracted.length}
+
+Generado: ${new Date().toLocaleString('es-ES')}
+            `;
+
+            const blob = new Blob([report], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Celerity_Reporte_${type}_${from}_${to}.txt`;
+            a.click();
+            URL.revokeObjectURL(url);
+
+            closeReportModal();
+        }
+
+        function exportAuditTrail() {
+            const data = auditLog.map(e => ({
+                fecha: new Date(e.timestamp).toLocaleString('es-ES'),
+                tipo: e.type,
+                descripcion: e.title,
+                usuario: e.user,
+                detalles: e.details ? JSON.stringify(e.details) : ''
+            }));
+
+            const csv = 'Fecha,Tipo,Descripcion,Usuario,Detalles\n' +
+                data.map(row => `"${row.fecha}","${row.tipo}","${row.descripcion}","${row.usuario}","${row.detalles}"`).join('\n');
+
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Celerity_AuditTrail_${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // ========== PDF EXPORT ==========
+        function exportToPDF() {
+            const element = document.querySelector('.container');
+            const opt = {
+                margin: 10,
+                filename: `Celerity_BD_Report_${new Date().toISOString().split('T')[0]}.pdf`,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'landscape' }
+            };
+
+            // Hide no-print elements
+            document.querySelectorAll('.no-print').forEach(el => el.style.display = 'none');
+
+            html2pdf().set(opt).from(element).save().then(() => {
+                // Restore no-print elements
+                document.querySelectorAll('.no-print').forEach(el => el.style.display = '');
+            });
+        }
+
+        // Close modals on overlay click
+        document.querySelectorAll('.modal-overlay').forEach(overlay => {
+            overlay.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    this.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
